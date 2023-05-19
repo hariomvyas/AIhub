@@ -1,0 +1,65 @@
+{% extends 'base.html' %}\
+
+{% block title %}Supervised Models{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Supervised Models</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Machine Learning</li>
+            <li class="breadcrumb-item active">Supervised Models</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Select a Model</h5>
+
+                    <form method="POST" action="/select_model">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Model</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="model_name" id="model_name">
+                                    <option value="logistic_regression">Logistic Regression</option>
+                                    <option value="decision_tree">Decision Tree Classifier</option>
+                                    <option value="random_forest">Random Forest Classifier</option>
+                                    <option value="kneighbors_classifier">KNeighbors Classifier</option>
+                                    <option value="svc">SVC Classifier</option>
+                                    <option value="gaussian">GaussianNB Classifier</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Selected Columns</label>
+                            <div class="col-sm-10">
+                                <p>{{ columns|join(', ') }}</p>
+                            </div>
+                        </div>
+                        <input type="hidden" name="filename" value="{{ filename }}">
+                        <input type="hidden" name="model_name" value="{{ model_name }}">
+                        <input type="hidden" name="columns" value="{{ columns|join(',') }}">
+                        <input type="hidden" name="X_train" value="{{ X_train }}">
+                        <input type="hidden" name="X_test" value="{{ X_test }}">
+                        <input type="hidden" name="y_train" value="{{ y_train }}">
+                        <input type="hidden" name="y_test" value="{{ y_test }}">
+                        <div class="row mb-12">
+                            <div class="col-sm-12">
+                                <input class="btn btn-primary" type="submit" value="Next">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

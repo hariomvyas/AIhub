@@ -1,0 +1,29 @@
+{% extends 'base.html' %}\
+
+{% block title %}Supervised Models{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Supervised Models</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Machine Learning</li>
+            <li class="breadcrumb-item active">Supervised Models</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section">
+
+    <h1>Upload CSV File</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+
+</section>
+
+{% endblock %}

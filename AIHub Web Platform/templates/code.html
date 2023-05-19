@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Datasets{% endblock %}
+
+{% block content %}
+
+<div class="container notebook-container">
+    <h1>Jupyter-like Notebook</h1>
+    <form method="POST">
+        {% for code in code_containers %}
+        <div class="mb-3">
+            <label for="code{{ loop.index }}" class="form-label">Code:</label>
+            <textarea class="form-control" id="code{{ loop.index }}" name="code" rows="5" required>{{ code }}</textarea>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Run Code</button>
+    </form>
+
+    <form method="POST" action="/new_code_container">
+        <button type="submit" class="btn btn-secondary mt-3">New Code Container</button>
+    </form>
+
+    <div class="mt-4">
+        <h3>Output:</h3>
+        <div id="output" class="border p-2">
+            <pre>{{ stdout }}</pre>
+            <pre>{{ stderr }}</pre>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

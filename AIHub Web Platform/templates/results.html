@@ -1,0 +1,86 @@
+{% extends 'base.html' %}\
+
+{% block title %}Supervised Models{% endblock %}
+
+{% block content %}
+<div class="pagetitle">
+    <h1>Supervised Models</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Machine Learning</li>
+            <li class="breadcrumb-item active">Supervised Models</li>
+        </ol>
+    </nav>
+</div>
+
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Result: {{ model_name }}</h5>
+                    <p><b>Selected Columns:</b> {{ columns|join(', ') }}</p>
+
+                    <!-- Table with stripped rows -->
+                    <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                        <div class="datatable-container">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Metric</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Accuracy</td>
+                                        <td>{{ accuracy }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Precision</td>
+                                        <td>{{ precision }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Recall</td>
+                                        <td>{{ recall }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>F1 Score</td>
+                                        <td>{{ f1_score }}</td>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Hamming Loss</td>
+                                        <td>{{ hamming_loss }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Log Loss</td>
+                                        <td>{{ log_loss }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>Zero One Loss</td>
+                                        <td>{{ zero_one_loss }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Table with stripped rows -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

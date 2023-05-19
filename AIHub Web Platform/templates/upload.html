@@ -1,0 +1,45 @@
+{% extends 'base.html' %}\
+
+{% block title %}Supervised Models{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Supervised Models</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Machine Learning</li>
+            <li class="breadcrumb-item active">Supervised Models</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Train a Supervised Model</h5>
+
+                    <form method="POST" action="/upload" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <label for="inputNumber" class="col-sm-2 col-form-label">Dataset File</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="file" id="file" name="file" accept=".csv" required>
+                            </div>
+                        </div>
+                        <div class="row mb-12">
+                            <div class="col-sm-12">
+                                <input class="btn btn-primary" type="submit" value="Next">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Datasets{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+  <h1>Your Datasets</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item">Datasets</li>
+      <li class="breadcrumb-item active">Your Datasets</li>
+    </ol>
+  </nav>
+</div>
+
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <!-- Table with stripped rows -->
+          <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+            <div class="datatable-top">
+              <div class="datatable-dropdown">
+                <label>
+                  <select class="datatable-selector">
+                    <option value="5">5</option>
+                    <option value="10" selected="">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                  </select> entries per page
+                </label>
+              </div>
+              <div class="datatable-search">
+                <input class="datatable-input" placeholder="Search..." type="search" title="Search within table">
+              </div>
+            </div>
+            <div class="datatable-container">
+              <table class="table datatable datatable-table">
+                <thead>
+                  <tr>
+                    <th data-sortable="true" style="width: 9.25925925925926%;"><a href="#"
+                        class="datatable-sorter">#</a></th>
+                    <th data-sortable="true" style="width: 26.234567901234566%;"><a href="#"
+                        class="datatable-sorter">Name</a></th>
+                    <th data-sortable="true" style="width: 59%;"><a href="#" class="datatable-sorter">Description</a>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for project in total_projects %}
+                  <tr>
+                    <td>{{project.id}}</td>
+                    <td><a href="{{ url_for('detaildatasets', project_id=project.id) }}">{{project.name}}</a></td>
+                    <td>{{project.description}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- End Table with stripped rows -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

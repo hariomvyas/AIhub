@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+  <h1>{{ project.name }}</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">{{ project.description }}</li>
+    </ol>
+  </nav>
+</div>
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Pre-process Data</h5>
+
+          <form method="POST" action="{{ url_for('detaildatasets', project_id=project.id) }}">
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="functions">Table Operations:</label>
+              <div class="col-sm-10">
+                <select class="form-select" name="functions" multiple>
+                  <option value="drop_na">Drop NA</option>
+                  <option value="drop_duplicates">Drop Duplicates</option>
+                  <option value="drop_null">Drop Null Values</option>
+                  <option value="fill_null">Fill Null Values</option>
+                  <option value="standardize">Standardize Values</option>
+                  <option value="normalize">Normalize Values</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="columns">Columns:</label>
+              <div class="col-sm-10">
+                <select class="form-select" name="columns" multiple>
+                  {% for header in headers %}
+                  <option value="{{ header }}">{{ header }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <input class="btn btn-primary" type="submit" value="Apply">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- Table with stripped rows -->
+          <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+            <div class="datatable-top">
+              <div class="datatable-search">
+                <form method="GET" action="{{ url_for('detaildatasets', project_id=project.id) }}">
+                  <input class="datatable-input" type="text" name="search" placeholder="Search term">
+                  <input class="btn btn-secondary" type="submit" value="Search">
+                </form>
+              </div>
+            </div>
+            <div class="datatable-container">
+              <table class="table datatable datatable-table">
+                <thead>
+                  <tr>
+                    {% for header in headers %}
+                    <th>
+                      <a href="{{ url_for('detaildatasets', project_id=project.id, sort=header) }}">
+                        {{ header }}
+                      </a>
+                    </th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for row in data_rows %}
+                  <tr>
+                    {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="datatable-bottom">
+              <nav class="datatable-pagination">
+                  {% if total_pages > 1 %}
+                  <ul class="datatable-pagination-list">
+                    {% if current_page > 1 %}
+                    <li><a href="{{ url_for('detaildatasets', project_id=project.id, page=current_page-1) }}">Previous</a></li>
+                    {% endif %}
+                    {% for page in range(1, total_pages+1) %}
+                    <li {% if page==current_page %}class="active" {% endif %}><a
+                        href="{{ url_for('detaildatasets', project_id=project.id, page=page) }}">{{ page }}</a></li>
+                    {% endfor %}
+                    {% if current_page < total_pages %} <li><a
+                        href="{{ url_for('detaildatasets', project_id=project.id, page=current_page+1) }}">Next</a></li>
+                      {% endif %}
+                  </ul>
+                  {% endif %}
+              </nav>
+            </div>
+          </div>
+          <!-- End Table with stripped rows -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
